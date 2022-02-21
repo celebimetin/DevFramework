@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=6.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.4.1\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IProductService.cs" />
+    <Compile Include="Concrete\Managers\ProductManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidaitonRules\FluentValidation\ProductValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevFramework.Core\DevFramework.Core.csproj">
+      <Project>{ec894331-e4f0-450d-897b-457cc6e28ae2}</Project>
+      <Name>DevFramework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevFramework.Northwind.DataAccess\DevFramework.Northwind.DataAccess.csproj">
+      <Project>{95BD6A48-A41D-405F-8123-EDD141CEBD49}</Project>
+      <Name>DevFramework.Northwind.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevFramework.Northwind.Entities\DevFramework.Northwind.Entities.csproj">
+      <Project>{D2C1E45A-D395-4E95-A7FB-47122D691153}</Project>
+      <Name>DevFramework.Northwind.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
