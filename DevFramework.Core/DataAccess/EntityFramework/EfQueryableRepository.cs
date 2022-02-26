@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DevFramework.Core.DataAccess.EntityFramework
 {
-    class EfQueryableRepository<T> : IQueryableRepository<T> where T : class, IEntity, new()
+    public class EfQueryableRepository<T> : IQueryableRepository<T> where T : class, IEntity, new()
     {
         private DbContext _context;
         private IDbSet<T> _entities;
