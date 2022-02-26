@@ -1,4 +1,4 @@
-﻿using DevFramework.Core.Aspects.Postsharp;
+﻿using DevFramework.Core.Aspects.Postsharp.TransactionAspects;
 using DevFramework.Northwind.Business.Abstract;
 using DevFramework.Northwind.Business.ValidaitonRules.FluentValidation;
 using DevFramework.Northwind.DataAccess.Abstract;
