@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace DevFramework.Core.Aspects.Postsharp.CacheAspects
 {
+    [Serializable]
     public class CacheRemoveAspect : OnMethodBoundaryAspect
     {
         private string _pattern;
