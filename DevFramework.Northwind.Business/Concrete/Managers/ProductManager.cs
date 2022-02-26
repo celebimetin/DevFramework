@@ -1,4 +1,6 @@
-﻿using DevFramework.Core.Aspects.Postsharp.TransactionAspects;
+﻿using DevFramework.Core.Aspects.Postsharp.CacheAspects;
+using DevFramework.Core.Aspects.Postsharp.TransactionAspects;
+using DevFramework.Core.CrossCuttingConcerns.Caching.Microsoft;
 using DevFramework.Northwind.Business.Abstract;
 using DevFramework.Northwind.Business.ValidaitonRules.FluentValidation;
 using DevFramework.Northwind.DataAccess.Abstract;
@@ -16,6 +18,7 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
             _productDal = productDal;
         }
 
+        [CacheAspect(typeof(MemoryCacheManager))]
         public List<Product> GetAll()
         {
             return _productDal.GetList();
@@ -27,6 +30,7 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
         }
 
         [FluentValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect(typeof(MemoryCacheManager))]
         public Product Add(Product product)
         {
             return _productDal.Add(product);
@@ -38,7 +42,6 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
             return _productDal.Update(product);
         }
 
-        [FluentValidationAspect(typeof(ProductValidator))]
         public void Delete(Product productId)
         {
             _productDal.Delete(productId);
