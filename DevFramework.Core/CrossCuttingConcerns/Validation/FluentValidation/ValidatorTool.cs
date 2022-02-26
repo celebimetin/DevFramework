@@ -2,7 +2,7 @@
 
 namespace DevFramework.Core.CrossCuttingConcerns.Validation.FluentValidation
 {
-    public class ValidationTool
+    public class ValidatorTool
     {
         public static void FluentValidate(IValidator validator, object entity)
         {
