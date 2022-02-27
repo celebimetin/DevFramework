@@ -1,6 +1,5 @@
 ﻿using log4net.Core;
 using log4net.Layout;
-using System;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -8,10 +7,7 @@ namespace DevFramework.Core.CrossCuttingConcerns.Logging.Log4Net.Layouts
 {
     public class JsonLayout : LayoutSkeleton
     {
-        public override void ActivateOptions()
-        {
-            throw new NotImplementedException();
-        }
+        public override void ActivateOptions() { }
 
         public override void Format(TextWriter writer, LoggingEvent loggingEvent)
         {
