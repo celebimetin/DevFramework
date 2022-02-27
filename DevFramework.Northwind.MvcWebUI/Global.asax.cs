@@ -1,8 +1,13 @@
-﻿using DevFramework.Core.Utilities.Mvc.Infrastructure;
+﻿using DevFramework.Core.CrossCuttingConcerns.Security.Web;
+using DevFramework.Core.Utilities.Mvc.Infrastructure;
 using DevFramework.Northwind.Business.DependencyResolvers.Ninject;
+using System;
+using System.Security.Principal;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace DevFramework.Northwind.MvcWebUI
 {
@@ -13,6 +18,40 @@ namespace DevFramework.Northwind.MvcWebUI
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory(new BusinessModule()));
+        }
+
+        public override void Init()
+        {
+            PostAuthenticateRequest += MvcApplication_PostAuthenticateRequest;
+            base.Init();
+        }
+
+        private void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
+        {
+            try
+            {
+                var autCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (autCookie == null)
+                {
+                    return;
+                }
+                var encTicket = autCookie.Value;
+                if (String.IsNullOrEmpty(encTicket))
+                {
+                    return;
+                }
+                var ticket = FormsAuthentication.Decrypt(encTicket);
+
+                var securityUtlities = new SecurityUtilities();
+                var identity = securityUtlities.FormsAuthTicketToIdentity(ticket);
+                var principal = new GenericPrincipal(identity, identity.Roles);
+
+                HttpContext.Current.User = principal;
+                Thread.CurrentPrincipal = principal;
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }
