@@ -15,9 +15,6 @@ namespace DevFramework.Northwind.Business.Tests
         public void Product_Validation_Check()
         {
             Mock<IProductDal> mock = new Mock<IProductDal>();
-            ProductManager productManager = new ProductManager(mock.Object);
-
-            productManager.Add(new Product());
         }
     }
 }
