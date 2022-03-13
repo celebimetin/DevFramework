@@ -1,37 +1,45 @@
 ﻿using DevFramework.Northwind.Business.Abstract;
 using DevFramework.Northwind.Business.DependencyResolvers.Ninject;
 using DevFramework.Northwind.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 
-namespace DevFramework.Northwind.WcfService.App_Code
+/// <summary>
+/// Summary description for ProductService
+/// </summary>
+public class ProductService : IProductService
 {
-    public class ProductService : IProductService
+    public ProductService()
     {
-        IProductService _productService = InstanceFactory.GetInstance<IProductService>();
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
-        public List<Product> GetAll()
-        {
-            return _productService.GetAll();
-        }
+    private IProductService _productService = InstanceFactory.GetInstance<IProductService>();
 
-        public Product GeyById(int id)
-        {
-            return _productService.GeyById(id);
-        }
+    public Product Add(Product product)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Product Add(Product product)
-        {
-            return _productService.Add(product);
-        }
+    public List<Product> GetAll()
+    {
+        return _productService.GetAll();
+    }
 
-        public Product Update(Product product)
-        {
-            return _productService.Update(product);
-        }
+    public Product GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-        public void Delete(Product productId)
-        {
-            _productService.Delete(productId);
-        }
+    public void TransactionalOperation(Product product1, Product product2)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Product Update(Product product)
+    {
+        throw new NotImplementedException();
     }
 }
